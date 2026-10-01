@@ -11,13 +11,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta name="description"
-
     content="Sistema simples de ponto para pequenas equipes: entrada, saída, intervalo, painel do administrador e exportação em CSV.">
 
   <title>Ponto Equipe — Controle de ponto simples</title>
 
   <style>
-
     :root {
 
       --bg: #D3E3FD;
@@ -51,7 +49,6 @@
     * {
 
       box-sizing: border-box
-
     }
 
 
@@ -59,7 +56,6 @@
     html {
 
       scroll-behavior: smooth
-
     }
 
 
@@ -77,7 +73,6 @@
       line-height: 1.55;
 
       -webkit-font-smoothing: antialiased
-
     }
 
 
@@ -87,7 +82,6 @@
       color: inherit;
 
       text-decoration: none
-
     }
 
 
@@ -97,7 +91,6 @@
       width: min(var(--max), calc(100% - 36px));
 
       margin: auto
-
     }
 
 
@@ -111,11 +104,11 @@
       z-index: 20;
 
       background: none;
+      border-radius: 0 0 20px 20px;
 
       backdrop-filter: blur(14px);
 
-      border-bottom: 1px solid rgba(223, 230, 226, .8)
-
+      border: 1px solid rgba(223, 230, 226, .8)
     }
 
 
@@ -131,7 +124,6 @@
       justify-content: space-between;
 
       gap: 24px
-
     }
 
 
@@ -144,12 +136,11 @@
 
       gap: 10px;
 
-      font-weight: 800;
+      font-weight: 600;
 
       letter-spacing: -.02em;
 
       font-size: 20px
-
     }
 
 
@@ -160,7 +151,7 @@
 
       height: 36px;
 
-      border-radius: 12px;
+      border-radius: 50px;
 
       background: var(--green);
 
@@ -171,7 +162,6 @@
       color: white;
 
       box-shadow: 0 8px 18px rgba(23, 107, 82, .18)
-
     }
 
 
@@ -189,7 +179,6 @@
       font-weight: 700;
 
       color: #52605b
-
     }
 
 
@@ -197,7 +186,6 @@
     .nav-links a:hover {
 
       color: var(--green)
-
     }
 
 
@@ -221,7 +209,6 @@
       border: 1px solid transparent;
 
       transition: .2s ease
-
     }
 
 
@@ -233,7 +220,6 @@
       color: white;
 
       box-shadow: 0 10px 24px rgba(23, 107, 82, .18)
-
     }
 
 
@@ -243,7 +229,6 @@
       background: var(--green-dark);
 
       transform: translateY(-1px)
-
     }
 
 
@@ -253,7 +238,6 @@
       background: white;
 
       border-color: var(--line)
-
     }
 
 
@@ -261,7 +245,6 @@
     .btn-secondary:hover {
 
       border-color: #bfcac5
-
     }
 
 
@@ -269,7 +252,6 @@
     .hero {
 
       padding: 82px 0 70px
-
     }
 
 
@@ -283,7 +265,6 @@
       gap: 56px;
 
       align-items: center
-
     }
 
 
@@ -343,7 +324,6 @@
       max-width: 650px;
 
       margin: 0 0 28px
-
     }
 
 
@@ -357,7 +337,6 @@
       flex-wrap: wrap;
 
       margin-bottom: 24px
-
     }
 
 
@@ -386,7 +365,7 @@
 
       border-radius: 50%;
 
-      background: var(--green-soft);
+      background: var(--surface);
 
       color: var(--green);
 
@@ -992,15 +971,15 @@
 
       font-weight: 600;
 
-      color: var(--green);
+      color: var(--green-dark);
 
-      background: linear-gradient(140deg, #41ff8a, #c5ffdb);
+      background: var(--green-soft);
+      border: 1px solid var(--green-dark);
 
       padding: 7px 14px;
 
       border-radius: 999px;
 
-      box-shadow: inset 0 0 25px #ffffff, inset 0 0 10px #ffffff, 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
 
     }
 
@@ -1377,7 +1356,6 @@
       .wrap {
 
         width: min(var(--max), calc(100% - 24px))
-
       }
 
 
@@ -1505,7 +1483,6 @@
       }
 
     }
-
   </style>
 
 </head>
