@@ -115,7 +115,7 @@
 
     .nav {
 
-      min-height: 72px;
+      height: 82px; 
 
       display: flex;
 
@@ -365,9 +365,30 @@
 
       border-radius: 50%;
 
-      background: var(--surface);
+      background: var(--green-soft); 
 
       color: var(--green);
+
+      display: inline-grid;
+
+      place-items: center;
+
+      font-weight: 500;
+
+      flex: 0 0 auto;
+
+    }
+    .check-1 {
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 50%;
+
+      background: #4c82df; 
+
+      color: var(--surface);
 
       display: inline-grid;
 
@@ -861,9 +882,10 @@
 
     .benefit-side {
 
-      background: var(--surface-soft);
+      background: var(--green-soft);
 
-      border: 1px solid #d9e8e2;
+
+      border: 1px solid var(--green-dark);
 
       border-radius: 28px;
 
@@ -1060,6 +1082,7 @@
       gap: 12px;
 
     }
+    
 
 
 
@@ -1072,7 +1095,11 @@
       gap: 10px;
 
     }
-
+    .tudo-plano {
+      color: #4c82df;
+      font-weight: 700;
+      font-size: 17px;
+    }
 
 
     .example {
@@ -1597,61 +1624,7 @@
 
 
 
-    <section id="como-funciona">
-
-      <div class="wrap">
-
-        <div class="section-head">
-
-          <h2>Funciona de um jeito simples.</h2>
-
-          <p>O funcionário marca o ponto. O sistema calcula. Você acompanha.</p>
-
-        </div>
-
-        <div class="simple-flow">
-
-          <h2>Três passos. Só isso.</h2>
-
-          <div class="steps">
-
-            <div class="step">
-
-              <div class="step-number">1</div>
-
-              <h3>Funcionário marca o ponto</h3>
-
-              <p>Entrada, início do intervalo, retorno e saída pelo próprio celular.</p>
-
-            </div>
-
-            <div class="step">
-
-              <div class="step-number">2</div>
-
-              <h3>As horas ficam organizadas</h3>
-
-              <p>O sistema registra os horários e mostra as horas trabalhadas.</p>
-
-            </div>
-
-            <div class="step">
-
-              <div class="step-number">3</div>
-
-              <h3>Você acompanha a equipe</h3>
-
-              <p>No painel do administrador, você vê funcionários e horas da semana.</p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+   
 
 
 
@@ -1805,7 +1778,7 @@
 
             <ul class="price-list">
 
-              <li><span class="check">✓</span><span>Tudo do Plano Essencial</span></li>
+             <li><span class="check-1">✓</span><span class="tudo-plano">Tudo do Plano Essencial</span></li>
 
               <li><span class="check">✓</span><span>PDF organizado por funcionário</span></li>
 
@@ -1823,19 +1796,6 @@
 
 
 
-        <div class="example">
-
-          <div>
-
-            <strong>Exemplo: empresa com 4 funcionários</strong>
-
-            <p>$60/mês no Essencial ou $80/mês com relatórios em PDF.</p>
-
-          </div>
-
-          <div class="example-price">$60 ou $80</div>
-
-        </div>
 
       </div>
 
@@ -1885,15 +1845,6 @@
 
           </details>
 
-          <details>
-
-            <summary>Quanto custa para 4 funcionários?</summary>
-
-            <p>$60 por mês no Plano Essencial. Com relatório em PDF para os quatro funcionários, o total fica $80 por
-
-              mês.</p>
-
-          </details>
 
         </div>
 
