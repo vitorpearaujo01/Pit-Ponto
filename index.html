@@ -108,7 +108,7 @@
 
       backdrop-filter: blur(14px);
 
-      border: 1px solid rgba(223, 230, 226, .8)
+      border: 1px solid #ffffff;
     }
 
 
@@ -183,12 +183,6 @@
 
 
 
-    .nav-links a:hover {
-
-      color: var(--green)
-    }
-
-
 
     .btn {
 
@@ -224,12 +218,6 @@
 
 
 
-    .btn-primary:hover {
-
-      background: var(--green-dark);
-
-      transform: translateY(-1px)
-    }
 
 
 
@@ -322,8 +310,12 @@
       color: #596760;
 
       max-width: 650px;
+      padding: 18px; 
+      background: var(--surface);
 
-      margin: 0 0 28px
+      margin: 0 0 28px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
     }
 
 
@@ -386,7 +378,7 @@
 
       border-radius: 50%;
 
-      background: #4c82df; 
+      background: var(--green-dark); 
 
       color: var(--surface);
 
@@ -828,9 +820,10 @@
 
     .benefit-main {
 
-      background: var(--surface);
+      background: var(--green);
+      color: var(--surface);
 
-      border: 1px solid var(--line);
+      border: none;
 
       border-radius: 28px;
 
@@ -1096,7 +1089,7 @@
 
     }
     .tudo-plano {
-      color: #4c82df;
+      color: var(--green-dark);
       font-weight: 700;
       font-size: 17px;
     }
@@ -1258,7 +1251,7 @@
 
       background: white;
 
-      color: var(--green-dark);
+      color: var(--text);
 
     }
 
@@ -1554,9 +1547,8 @@
 
         <div>
 
-          <div class="eyebrow">Controle de ponto simples para sua equipe</div>
 
-          <h1>Saiba quem trabalhou e quantas horas fez.</h1>
+          <h1> Controle de ponto simples para sua equipe</h1>
 
           <p class="lead">Seus funcionários registram entrada, saída e intervalo pelo celular. Você acompanha as horas
 
@@ -1570,9 +1562,6 @@
 
           </div>
 
-          <div class="hero-note"><span class="check">✓</span>Sem papel, sem conta manual de horas e sem sistema
-
-            complicado.</div>
 
         </div>
 
@@ -1678,51 +1667,6 @@
 
     </section>
 
-
-
-    <section id="vantagens">
-
-      <div class="wrap benefit-wrap">
-
-        <div class="benefit-main">
-
-          <h2>Menos tempo conferindo horas. Mais controle da equipe.</h2>
-
-          <div class="benefit-list">
-
-            <div class="benefit-item"><span class="check">✓</span><span>Evita depender de papel, mensagens ou anotações
-
-                espalhadas.</span></div>
-
-            <div class="benefit-item"><span class="check">✓</span><span>Facilita conferir as horas antes de fazer o
-
-                pagamento.</span></div>
-
-            <div class="benefit-item"><span class="check">✓</span><span>Mostra de forma rápida quem está trabalhando
-
-                naquele momento.</span></div>
-
-            <div class="benefit-item"><span class="check">✓</span><span>Você paga somente pelos funcionários que usam o
-
-                sistema.</span></div>
-
-          </div>
-
-        </div>
-
-        <div class="benefit-side">
-
-          <div class="big-number">$15</div>
-
-          <h3>por funcionário por mês</h3>
-
-          <p>Não é necessário comprar o sistema. A empresa paga pelo uso enquanto quiser continuar usando.</p>
-
-        </div>
-
-      </div>
-
-    </section>
 
 
 
