@@ -1,1841 +1,691 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
-
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description"
-    content="Sistema simples de ponto para pequenas equipes: entrada, saída, intervalo, painel do administrador e exportação em CSV.">
-
+  <meta name="description" content="Sistema simples de ponto para pequenas equipes: entrada, saída, intervalo, painel do administrador e exportação em CSV.">
   <title>Ponto Equipe — Controle de ponto simples</title>
 
   <style>
     :root {
-
       --bg: #E8F0FE;
-
       --surface: #fff;
-
-      --surface-soft: #eef4f1;
-
       --text: #131314;
-
       --muted: #63706b;
-
       --line: #dfe6e2;
-
       --green: #000000;
-
       --green-dark: #0f4f3d;
-
       --green-soft: #dfeee8;
-
       --shadow: 0 12px 35px rgba(20, 56, 46, .08);
-
       --radius: 22px;
-
       --max: 1080px;
-
     }
 
+    * { box-sizing: border-box; }
 
-
-    * {
-
-      box-sizing: border-box
-    }
-
-
-
-    html {
-
-      scroll-behavior: smooth
-    }
-
-
+    html { scroll-behavior: smooth; }
 
     body {
-
       margin: 0 25px;
-
       background: var(--bg);
-
       color: var(--text);
-
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-
       line-height: 1.55;
-
-      -webkit-font-smoothing: antialiased
+      -webkit-font-smoothing: antialiased;
     }
-
-
 
     a {
-
       color: inherit;
-
-      text-decoration: none
+      text-decoration: none;
     }
 
-
+    #inicio,
+    #como-funciona,
+    #vantagens,
+    #planos {
+      scroll-margin-top: 96px;
+    }
 
     .wrap {
-
       width: min(var(--max), calc(100% - 36px));
-
-      margin: auto
+      margin: auto;
     }
 
-
-
     .topbar {
-
       position: sticky;
-
       top: 0;
-
       z-index: 20;
-
       background: none;
       border-radius: 0 0 20px 20px;
-
       backdrop-filter: blur(14px);
-
       border: 1px solid #ffffff;
     }
 
-
-
     .nav {
-
-      height: 82px; 
-
+      height: 82px;
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
-      gap: 24px
+      gap: 24px;
     }
-
-
 
     .brand {
-
       display: flex;
-
       align-items: center;
-
       gap: 10px;
-
       font-weight: 600;
-
       letter-spacing: -.02em;
-
-      font-size: 20px
+      font-size: 20px;
     }
-
-
 
     .brand-mark {
-
       width: 36px;
-
       height: 36px;
-
       border-radius: 50px;
-
       background: var(--green);
-
       display: grid;
-
       place-items: center;
-
       color: white;
-
-      box-shadow: 0 8px 18px rgba(23, 107, 82, .18)
+      box-shadow: 0 8px 18px rgba(23, 107, 82, .18);
     }
-
-
 
     .nav-links {
-
       display: flex;
-
       align-items: center;
-
       gap: 22px;
-
       font-size: 14px;
-
       font-weight: 700;
-
-      color: #52605b
+      color: #52605b;
     }
 
-
-
+    .nav-links a:hover { color: var(--green); }
 
     .btn {
-
       display: inline-flex;
-
       align-items: center;
-
       justify-content: center;
-
       min-height: 52px;
-
       padding: 11px 17px;
-
       border-radius: 50px;
-
       font-weight: 600;
-
       border: 1px solid transparent;
-
-      transition: .2s ease
+      transition: .2s ease;
+      cursor: pointer;
     }
-
-
 
     .btn-primary {
-
       background: var(--green);
-
       color: white;
-
-      box-shadow: 0 10px 24px rgba(23, 107, 82, .18)
+      box-shadow: 0 10px 24px rgba(23, 107, 82, .18);
     }
 
-
-
-
-
+    .btn-primary:hover {
+      opacity: .86;
+      transform: translateY(-1px);
+    }
 
     .btn-secondary {
-
       background: white;
-
-      border-color: var(--line)
+      border-color: var(--line);
     }
 
+    .btn-secondary:hover { border-color: #bfcac5; }
 
-
-    .btn-secondary:hover {
-
-      border-color: #bfcac5
-    }
-
-
-
-    .hero {
-
-      padding: 82px 0 70px
-    }
-
-
+    .hero { padding: 82px 0 70px; }
 
     .hero-grid {
-
       display: grid;
-
       grid-template-columns: 1.05fr .95fr;
-
       gap: 56px;
-
-      align-items: center
-    }
-
-
-
-    .eyebrow {
-
-      display: inline-flex;
-
       align-items: center;
-
-      gap: 8px;
-
-      font-size: 14px;
-
-      font-weight: 500;
-
-      border: 1px solid #e5dedd;
-
-      color: #336b44;
-
-      background: var(--surface);
-
-      border-radius: 999px;
-
-      padding: 12px 16px;
-
-      margin-bottom: 40px;
-
     }
-
-
 
     h1 {
-
       font-size: clamp(42px, 6vw, 72px);
-
       line-height: 1.02;
-
       letter-spacing: -.045em;
-
-      margin: 0 0 22px;
-
+      margin: 0 0 40px;
       max-width: 760px;
-
-      margin-bottom: 40px;
-
     }
 
-
-
     .lead {
-
       font-size: 20px;
-
       color: #596760;
-
       max-width: 650px;
-      padding: 18px; 
+      padding: 18px;
       background: var(--surface);
-
       margin: 0 0 28px;
       border: 1px solid var(--line);
       border-radius: 28px;
     }
 
-
-
     .hero-actions {
-
       display: flex;
-
       gap: 12px;
-
       flex-wrap: wrap;
-
-      margin-bottom: 24px
+      margin-bottom: 24px;
     }
-
-
-
-    .hero-note {
-
-      font-size: 14px;
-
-      color: #327452;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 9px;
-
-    }
-
-
-
-    .check {
-
-      width: 32px;
-
-      height: 32px;
-
-      border-radius: 50%;
-
-      background: var(--green-soft); 
-
-      color: var(--green);
-
-      display: inline-grid;
-
-      place-items: center;
-
-      font-weight: 500;
-
-      flex: 0 0 auto;
-
-    }
-    .check-1 {
-
-      width: 32px;
-
-      height: 32px;
-
-      border-radius: 50%;
-
-      background: var(--green-dark); 
-
-      color: var(--surface);
-
-      display: inline-grid;
-
-      place-items: center;
-
-      font-weight: 500;
-
-      flex: 0 0 auto;
-
-    }
-
-
 
     .mockup {
-
       background: var(--surface);
-
       border: 1px solid var(--line);
-
       border-radius: 28px;
-
       padding: 18px;
-
       box-shadow: var(--shadow);
-
     }
-
-
 
     .mockup-top {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
       margin-bottom: 15px;
-
     }
 
-
-
-    .mockup-title {
-
-      font-weight: 800;
-
-    }
-
-
+    .mockup-title { font-weight: 800; }
 
     .mockup-badge {
-
       font-size: 12px;
-
       font-weight: 800;
-
       background: #eef5f2;
-
       color: var(--green);
-
       padding: 7px 10px;
-
       border-radius: 999px;
-
     }
-
-
 
     .stats {
-
       display: grid;
-
       grid-template-columns: 1fr 1fr;
-
       gap: 12px;
-
       margin-bottom: 12px;
-
     }
-
-
 
     .stat {
-
       padding: 18px;
-
       border-radius: 18px;
-
       background: #f7f9f8;
-
       border: 1px solid #edf0ee;
-
     }
-
-
 
     .stat small {
-
       display: block;
-
       color: var(--muted);
-
       margin-bottom: 7px;
-
     }
-
-
 
     .stat strong {
-
       font-size: 28px;
-
       letter-spacing: -.04em;
-
     }
-
-
 
     .people {
-
       border: 1px solid #edf0ee;
-
       border-radius: 18px;
-
       overflow: hidden;
-
-
-
     }
-
-
 
     .person {
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
       padding: 15px 16px;
-
       border-bottom: 1px solid #edf0ee;
-
       gap: 10px;
-
     }
 
-
-
-    .person:last-child {
-
-      border-bottom: 0;
-
-    }
-
-
-
-    .person-name {
-
-      font-weight: 750;
-
-    }
-
-
+    .person:last-child { border-bottom: 0; }
+    .person-name { font-weight: 750; }
 
     .status {
-
       font-size: 13px;
-
       font-weight: 600;
-
       color: var(--green);
-
       background: linear-gradient(140deg, #41ff8a, #c5ffdb);
-
       padding: 7px 14px;
-
       border-radius: 999px;
-
       white-space: nowrap;
-
-      box-shadow: inset 0 0 25px #ffffff, inset 0 0 10px #ffffff, 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
-
+      box-shadow: inset 0 0 25px #ffffff, inset 0 0 10px #ffffff, 0 1px 2px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .06);
     }
-
-
 
     .status.off {
-
       background: #f1f2f1;
-
       color: #79827e;
-
-
-
+      box-shadow: none;
     }
 
-
-
-    section {
-
-      padding: 78px 0;
-
-    }
-
-
+    section { padding: 78px 0; }
 
     .section-head {
-
       max-width: 720px;
-
       margin: 0 auto 38px;
-
       text-align: center;
-
     }
-
-
 
     .section-head h2 {
-
       font-size: clamp(32px, 4.5vw, 48px);
-
       line-height: 1.08;
-
       letter-spacing: -.035em;
-
       margin: 0 0 40px;
-
     }
-
-
 
     .section-head p {
-
       margin: 0 0 40px;
-
       color: var(--muted);
-
       font-size: 18px;
-
     }
-
-
 
     .three {
-
       display: grid;
-
       grid-template-columns: repeat(3, 1fr);
-
       gap: 18px;
-
     }
-
-
 
     .info-card {
-
       background: var(--surface);
-
       border: 1px solid var(--line);
-
       border-radius: var(--radius);
-
       padding: 26px;
-
       box-shadow: 0 7px 24px rgba(20, 56, 46, .045);
-
     }
-
-
 
     .icon {
-
       width: 46px;
-
       height: 46px;
-
       border-radius: 50px;
-
       background: var(--green);
-
       display: grid;
-
       place-items: center;
-
       color: var(--surface);
-
       margin-bottom: 18px;
-
       font-size: 22px;
-
       font-weight: 900;
-
     }
-
-
 
     .info-card h3 {
-
       margin: 0 0 9px;
-
       font-size: 22px;
-
       letter-spacing: -.02em;
-
     }
-
-
 
     .info-card p {
-
       margin: 0;
-
       color: var(--muted);
-
     }
-
-
-
-    .simple-flow {
-
-      background: var(--surface);
-
-      color: var(--text);
-
-      border-radius: 32px;
-
-      border: 1px solid #e5dedd;
-
-      padding: 42px;
-
-      box-shadow: var(--shadow);
-
-    }
-
-
-
-    .simple-flow h2 {
-
-      margin: 0 0 26px;
-
-      font-size: clamp(30px, 4vw, 44px);
-
-      letter-spacing: -.035em;
-
-    }
-
-
-
-    .steps {
-
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 14px;
-
-    }
-
-
-
-    .step {
-
-      background: none;
-
-      border: 1px solid #e5dedd;
-
-      border-radius: 20px;
-
-      padding: 22px;
-
-    }
-
-
-
-    .step-number {
-
-      width: 34px;
-
-      height: 34px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      color: var(--surface);
-
-      font-weight: 900;
-
-      margin-bottom: 14px;
-
-    }
-
-
-
-    .step h3 {
-
-      margin: 0 0 7px;
-
-      font-size: 20px;
-
-    }
-
-
-
-    .step p {
-
-      margin: 0;
-
-      color: var(--text);
-
-    }
-
-
-
-    .benefit-wrap {
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 24px;
-
-      align-items: stretch;
-
-    }
-
-
-
-    .benefit-main {
-
-      background: var(--green);
-      color: var(--surface);
-
-      border: none;
-
-      border-radius: 28px;
-
-      padding: 34px;
-
-    }
-
-
-
-    .benefit-main h2 {
-
-      margin: 0 0 16px;
-
-      font-size: 38px;
-
-      line-height: 1.1;
-
-      letter-spacing: -.035em;
-
-    }
-
-
-
-    .benefit-list {
-
-      display: grid;
-
-      gap: 15px;
-
-      margin-top: 24px;
-
-    }
-
-
-
-    .benefit-item {
-
-      display: flex;
-
-      gap: 12px;
-
-      align-items: flex-start;
-
-      font-size: 17px;
-
-    }
-
-
-
-    .benefit-side {
-
-      background: var(--green-soft);
-
-
-      border: 1px solid var(--green-dark);
-
-      border-radius: 28px;
-
-      padding: 34px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-    }
-
-
-
-    .big-number {
-
-      font-size: 62px;
-
-      font-weight: 900;
-
-      letter-spacing: -.05em;
-
-      line-height: 1;
-
-      color: var(--green);
-
-      margin-bottom: 12px;
-
-    }
-
-
-
-    .benefit-side h3 {
-
-      font-size: 25px;
-
-      margin: 0 0 8px;
-
-    }
-
-
-
-    .benefit-side p {
-
-      margin: 0;
-
-      color: var(--muted);
-
-    }
-
-
 
     .pricing {
-
       display: grid;
-
       grid-template-columns: 1fr 1fr;
-
       gap: 20px;
-
       max-width: 900px;
-
       margin: 0 auto;
-
     }
-
-
 
     .price-card {
-
       background: var(--surface);
-
       border: 1px solid var(--line);
-
       border-radius: 28px;
-
       padding: 30px;
-
       position: relative;
-
     }
-
-
 
     .price-card.featured {
-
       border: 2px solid var(--green);
-
       box-shadow: var(--shadow);
-
     }
-
-
 
     .tag {
-
       position: absolute;
-
       top: 18px;
-
       right: 18px;
-
       font-size: 13px;
-
       font-weight: 600;
-
       color: var(--green-dark);
-
       background: var(--green-soft);
       border: 1px solid var(--green-dark);
-
       padding: 7px 14px;
-
       border-radius: 999px;
-
-
     }
-
-
 
     .plan-name {
-
       font-size: 18px;
-
       font-weight: 850;
-
       margin-bottom: 14px;
-
     }
-
-
 
     .price {
-
       display: flex;
-
       align-items: flex-end;
-
       gap: 6px;
-
       margin-bottom: 16px;
-
     }
-
-
 
     .price strong {
-
       font-size: 52px;
-
       line-height: .95;
-
       letter-spacing: -.05em;
-
     }
-
-
 
     .price span {
-
       color: var(--muted);
-
       font-weight: 700;
-
       padding-bottom: 6px;
-
     }
-
-
 
     .price-desc {
-
       color: var(--muted);
-
       min-height: 52px;
-
       margin-bottom: 22px;
-
     }
-
-
 
     .price-list {
-
       list-style: none;
-
       padding: 0;
-
       margin: 0;
-
       display: grid;
-
       gap: 12px;
-
     }
-    
-
-
 
     .price-list li {
-
       display: flex;
-
       align-items: flex-start;
-
       gap: 10px;
-
     }
+
+    .check,
+    .check-1 {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-weight: 500;
+      flex: 0 0 auto;
+    }
+
+    .check {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .check-1 {
+      background: var(--green-dark);
+      color: var(--surface);
+    }
+
     .tudo-plano {
       color: var(--green-dark);
       font-weight: 700;
       font-size: 17px;
     }
 
-
-    .example {
-
-      max-width: 900px;
-
-      margin: 20px auto 0;
-
-      border-radius: 22px;
-
-      background: #edf4f1;
-
-      border: 1px solid #dce9e4;
-
-      padding: 22px 24px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 18px;
-
-    }
-
-
-
-    .example strong {
-
-      font-size: 20px;
-
-    }
-
-
-
-    .example p {
-
-      margin: 3px 0 0;
-
-      color: var(--muted);
-
-    }
-
-
-
-    .example-price {
-
-      font-size: 34px;
-
-      font-weight: 900;
-
-      color: var(--green);
-
-      white-space: nowrap;
-
-    }
-
-
-
     .faq {
-
       max-width: 850px;
-
       margin: auto;
-
       display: grid;
-
       gap: 12px;
-
     }
-
-
 
     details {
-
       background: var(--surface);
-
       border: 1px solid var(--line);
-
       border-radius: 18px;
-
       padding: 19px 21px;
-
     }
-
-
 
     summary {
-
       cursor: pointer;
-
       font-weight: 800;
-
       font-size: 17px;
-
     }
-
-
 
     details p {
-
       color: var(--muted);
-
       margin: 13px 0 0;
-
     }
-
-
 
     .closing {
-
       text-align: center;
-
       background: var(--green);
-
       color: white;
-
       border-radius: 32px;
-
       padding: 48px 28px;
-
     }
-
-
 
     .closing h2 {
-
       font-size: clamp(32px, 4.5vw, 48px);
-
       line-height: 1.08;
-
       letter-spacing: -.035em;
-
       margin: 0 0 13px;
-
     }
-
-
 
     .closing p {
-
       max-width: 650px;
-
       margin: 0 auto 24px;
-
       color: rgba(255, 255, 255, .84);
-
       font-size: 18px;
-
     }
-
-
 
     .closing .btn {
-
       background: white;
-
       color: var(--text);
-
     }
-
-
 
     footer {
-
       padding: 34px 0 46px;
-
       color: var(--muted);
-
       font-size: 14px;
-
     }
-
-
 
     .footer-row {
-
       display: flex;
-
       justify-content: space-between;
-
       gap: 20px;
-
       align-items: center;
-
       border-top: 1px solid var(--line);
-
       padding-top: 24px;
-
     }
 
-
-
-    @media(max-width:820px) {
-
-      .nav-links a:not(.btn) {
-
-        display: none;
-
-      }
-
-
-
-      .hero {
-
-        padding-top: 56px;
-
-      }
-
-
-
+    @media (max-width: 820px) {
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding-top: 56px; }
       .hero-grid,
-
-      .benefit-wrap,
-
-      .pricing {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-
-      .hero-grid {
-
-        gap: 34px;
-
-      }
-
-
-
-      .three,
-
-      .steps {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-
-      .simple-flow {
-
-        padding: 30px 22px;
-
-      }
-
-
-
-      .example {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-      }
-
-
-
-      .example-price {
-
-        font-size: 30px;
-
-      }
-
-
-
-      .price-desc {
-
-        min-height: auto;
-
-      }
-
+      .pricing { grid-template-columns: 1fr; }
+      .hero-grid { gap: 34px; }
+      .three { grid-template-columns: 1fr; }
+      .price-desc { min-height: auto; }
     }
 
-
-
-    @media(max-width:520px) {
-
-      .wrap {
-
-        width: min(var(--max), calc(100% - 24px))
-      }
-
-
-
-      .nav {
-
-        min-height: 64px;
-
-      }
-
-
-
-      .brand {
-
-        font-size: 18px;
-
-      }
-
-
-
-      .nav-links {
-
-        gap: 8px;
-
-      }
-
-
-
+    @media (max-width: 520px) {
+      body { margin: 0 12px; }
+      .wrap { width: min(var(--max), calc(100% - 24px)); }
+      .nav { min-height: 64px; height: auto; }
+      .brand { font-size: 18px; }
+      .nav-links { gap: 8px; }
       .nav-links .btn {
-
         padding: 0 14px;
-
         min-height: 44px;
-
         font-size: 13px;
-
       }
-
-
-
-      h1 {
-
-        font-size: 43px;
-
-      }
-
-
-
-      .lead {
-
-        font-size: 18px;
-
-      }
-
-
-
+      h1 { font-size: 43px; }
+      .lead { font-size: 18px; }
       .hero-actions {
-
         display: grid;
-
         grid-template-columns: 1fr;
-
       }
-
-
-
-      .btn {
-
-        width: 100%;
-
-      }
-
-
-
-      section {
-
-        padding: 58px 0;
-
-      }
-
-
-
-      .stats {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-
-      .mockup {
-
-        padding: 13px;
-
-      }
-
-
-
-      .benefit-main,
-
-      .benefit-side,
-
-      .price-card {
-
-        padding: 24px;
-
-      }
-
-
-
-      .big-number {
-
-        font-size: 52px;
-
-      }
-
-
-
+      .btn { width: 100%; }
+      section { padding: 58px 0; }
+      .stats { grid-template-columns: 1fr; }
+      .mockup { padding: 13px; }
+      .price-card { padding: 24px; }
       .footer-row {
-
         flex-direction: column;
-
         align-items: flex-start;
-
       }
-
     }
   </style>
-
 </head>
 
-
-
 <body>
-
   <header class="topbar">
-
     <div class="wrap nav">
-
       <a class="brand" href="#inicio" aria-label="Ponto Equipe">
-
         <span class="brand-mark">✓</span><span>Ponto Equipe</span>
-
       </a>
 
       <nav class="nav-links" aria-label="Navegação principal">
-
         <a href="#como-funciona">Como funciona</a>
-
         <a href="#vantagens">Vantagens</a>
-
         <a href="#planos">Preço</a>
-
         <a class="btn btn-primary" href="#planos">Ver preço</a>
-
       </nav>
-
     </div>
-
   </header>
 
-
-
   <main id="inicio">
-
     <section class="hero">
-
       <div class="wrap hero-grid">
-
         <div>
+          <h1>Controle de ponto simples para sua equipe</h1>
 
-
-          <h1> Controle de ponto simples para sua equipe</h1>
-
-          <p class="lead">Seus funcionários registram entrada, saída e intervalo pelo celular. Você acompanha as horas
-
-            de toda a equipe em um único lugar.</p>
+          <p class="lead">Seus funcionários registram entrada, saída e intervalo pelo celular. Você acompanha as horas de toda a equipe em um único lugar.</p>
 
           <div class="hero-actions">
-
             <a class="btn btn-primary" href="#planos">Ver planos e preços</a>
-
             <a class="btn btn-secondary" href="#como-funciona">Entender como funciona</a>
-
           </div>
-
-
         </div>
 
-
-
         <div class="mockup" aria-label="Exemplo ilustrativo do painel">
-
           <div class="mockup-top">
-
             <div class="mockup-title">Sua equipe esta semana</div>
-
             <div class="mockup-badge">Exemplo</div>
-
           </div>
 
           <div class="stats">
-
             <div class="stat"><small>Trabalhando agora</small><strong>2 de 4</strong></div>
-
             <div class="stat"><small>Horas na semana</small><strong>122h 35m</strong></div>
-
           </div>
 
           <div class="people">
-
-            <div class="person"><span class="person-name">Funcionário A</span><span class="status">Trabalhando</span>
-
-            </div>
-
-            <div class="person"><span class="person-name">Funcionário B</span><span class="status">Trabalhando</span>
-
-            </div>
-
-            <div class="person"><span class="person-name">Funcionário C</span><span class="status off">Fora do
-
-                horário</span></div>
-
-            <div class="person"><span class="person-name">Funcionário D</span><span class="status off">Fora do
-
-                horário</span></div>
-
+            <div class="person"><span class="person-name">Funcionário A</span><span class="status">Trabalhando</span></div>
+            <div class="person"><span class="person-name">Funcionário B</span><span class="status">Trabalhando</span></div>
+            <div class="person"><span class="person-name">Funcionário C</span><span class="status off">Fora do horário</span></div>
+            <div class="person"><span class="person-name">Funcionário D</span><span class="status off">Fora do horário</span></div>
           </div>
-
         </div>
-
       </div>
-
     </section>
 
-
-
-   
-
-
-
-    <section>
-
+    <section id="como-funciona">
+      <div id="vantagens"></div>
       <div class="wrap">
-
         <div class="section-head">
-
           <h2>O que você recebe pelo valor mensal.</h2>
-
           <p>Sem lista enorme de funções. Apenas o que ajuda no controle da equipe.</p>
-
         </div>
 
         <div class="three">
-
           <article class="info-card">
-
             <div class="icon">1</div>
-
             <h3>Ponto pelo celular</h3>
-
             <p>O funcionário registra a própria jornada sem folha de papel.</p>
-
           </article>
 
           <article class="info-card">
-
             <div class="icon">2</div>
-
             <h3>Painel para o dono</h3>
-
             <p>Você consegue acompanhar quem está trabalhando e as horas registradas.</p>
-
           </article>
 
           <article class="info-card">
-
             <div class="icon">3</div>
-
             <h3>Arquivo das horas</h3>
-
             <p>Todos os clientes podem receber os registros em CSV sem custo adicional.</p>
-
           </article>
-
         </div>
-
       </div>
-
     </section>
 
-
-
-
     <section id="planos">
-
       <div class="wrap">
-
         <div class="section-head">
-
           <h2>Preço fácil de entender.</h2>
-
           <p>Escolha o sistema normal ou adicione o relatório em PDF.</p>
-
         </div>
 
         <div class="pricing">
-
           <article class="price-card">
-
             <div class="plan-name">Plano Essencial</div>
-
             <div class="price"><strong>$15</strong><span>/ funcionário / mês</span></div>
-
             <p class="price-desc">Para controlar o ponto e acompanhar as horas da equipe.</p>
 
             <ul class="price-list">
-
               <li><span class="check">✓</span><span>Registro de entrada, saída e intervalo</span></li>
-
               <li><span class="check">✓</span><span>Painel do funcionário</span></li>
-
               <li><span class="check">✓</span><span>Painel do administrador</span></li>
-
               <li><span class="check">✓</span><span>Acompanhamento das horas</span></li>
-
               <li><span class="check">✓</span><span>Arquivo CSV mensal grátis</span></li>
-
             </ul>
-
           </article>
 
-
-
           <article class="price-card featured">
-
             <div class="tag">Com relatório</div>
-
             <div class="plan-name">Plano Completo</div>
-
             <div class="price"><strong>$20</strong><span>/ funcionário / mês</span></div>
-
             <p class="price-desc">Tudo do Essencial + relatório mensal pronto para guardar.</p>
 
             <ul class="price-list">
-
-             <li><span class="check-1">✓</span><span class="tudo-plano">Tudo do Plano Essencial</span></li>
-
+              <li><span class="check-1">✓</span><span class="tudo-plano">Tudo do Plano Essencial</span></li>
               <li><span class="check">✓</span><span>PDF organizado por funcionário</span></li>
-
               <li><span class="check">✓</span><span>Logo da sua empresa no relatório</span></li>
-
               <li><span class="check">✓</span><span>Resumo das horas do mês</span></li>
-
               <li><span class="check">✓</span><span>Arquivo preparado para seu controle</span></li>
-
             </ul>
-
           </article>
-
         </div>
-
-
-
-
       </div>
-
     </section>
 
-
-
     <section>
-
       <div class="wrap">
-
         <div class="section-head">
-
           <h2>Dúvidas comuns.</h2>
-
         </div>
 
         <div class="faq">
-
           <details open>
-
             <summary>Estou comprando o sistema?</summary>
-
-            <p>Não. Você paga uma mensalidade para usar o sistema. Enquanto a assinatura estiver ativa, sua empresa
-
-              continua usando o serviço.</p>
-
+            <p>Não. Você paga uma mensalidade para usar o sistema. Enquanto a assinatura estiver ativa, sua empresa continua usando o serviço.</p>
           </details>
 
           <details>
-
             <summary>O CSV é pago?</summary>
-
-            <p>Não. O arquivo CSV faz parte do serviço normal e pode ser usado pela empresa para guardar seus registros.
-
-            </p>
-
+            <p>Não. O arquivo CSV faz parte do serviço normal e pode ser usado pela empresa para guardar seus registros.</p>
           </details>
 
           <details>
-
             <summary>O relatório em PDF é obrigatório?</summary>
-
-            <p>Não. É opcional. O adicional custa $5 por funcionário por mês e deixa os registros organizados em PDF com
-
-              a identidade da empresa.</p>
-
+            <p>Não. É opcional. O adicional custa $5 por funcionário por mês e deixa os registros organizados em PDF com a identidade da empresa.</p>
           </details>
-
-
         </div>
-
       </div>
-
     </section>
-
-
 
     <section>
-
       <div class="wrap">
-
         <div class="closing">
-
           <h2>Um jeito mais simples de controlar as horas da sua equipe.</h2>
-
-          <p>O funcionário marca o ponto pelo celular e você acompanha tudo em um único lugar, sem precisar ficar
-
-            somando horas manualmente.</p>
-
+          <p>O funcionário marca o ponto pelo celular e você acompanha tudo em um único lugar, sem precisar ficar somando horas manualmente.</p>
           <a class="btn" href="#planos">Ver os preços novamente</a>
-
         </div>
-
       </div>
-
     </section>
-
   </main>
 
-
-
   <footer>
-
     <div class="wrap footer-row">
-
       <div><strong>Ponto Equipe</strong></div>
-
       <div>Apresentação comercial · dados ilustrativos.</div>
-
     </div>
-
   </footer>
-
 </body>
-
-
-
 </html>
