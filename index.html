@@ -126,16 +126,26 @@
       letter-spacing: -.022em;
     }
 
+    .nav-link {
+      padding: 11px 17px;
+      border-radius: 50px;
+      transition: .2s ease;
+      color: var(--green);
+      background: var(--surface);
+      font-size: 17px;
+      line-height: 1.4705882353;
+      font-weight: 400;
+      letter-spacing: -.022em;
+      border: none;
+
+    }
+
     .btn-primary {
       background: var(--green);
       color: white;
       box-shadow: 0 10px 24px rgba(23, 107, 82, .18);
     }
 
-    .btn-primary:hover {
-      opacity: .86;
-      transform: translateY(-1px);
-    }
 
     .btn-secondary {
       background: white;
@@ -168,13 +178,12 @@
     }
 
     .lead {
-      font-size: 28px;
       color: var(--secundary);
       max-width: 650px;
       background: none;
       margin: 0 0 28px;
       border-radius: 50px;
-      font-size: 17px;
+      font-size: 22px;
       line-height: 1.4705882353;
       font-weight: 400;
       letter-spacing: -.022em;
@@ -312,7 +321,10 @@
     .section-head p {
       margin: 0 0 40px;
       color: var(--secundary);
-      font-size: 18px;
+      font-size: 22px;
+      line-height: 1.4705882353;
+      font-weight: 400;
+      letter-spacing: -.022em;
     }
 
     .three {
@@ -623,7 +635,7 @@
       </a>
 
       <nav class="nav-links" aria-label="Navegação principal">
-        <a href="#como-funciona">Como funciona</a>
+        <a class="nav-link" href="#como-funciona">Como funciona</a>
         <a class="btn btn-primary" href="#planos">Ver preço</a>
       </nav>
     </div>
