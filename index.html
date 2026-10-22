@@ -10,7 +10,7 @@
 
   <style>
     :root {
-      --bg: #ffffff;
+      --bg: #E8F0FE;
       --surface: #fff;
       --text: #131314;
       --muted: #63706b;
@@ -20,7 +20,7 @@
       --green-soft: #dfeaee;
       --secundary: #0076DF;
       --shadow: 0 12px 35px rgba(20, 56, 46, .08);
-      --radius: 22px;
+      --radius: 28px;
       --max: 1080px;
     }
 
@@ -64,10 +64,9 @@
       top: 0;
       z-index: 20;
       background: none;
-      border-radius: 0 0 20px 20px;
+      border-radius: 20px;
       backdrop-filter: blur(14px);
       border: 1px solid #ffffff;
-      box-shadow: 0 10px 24px rgba(23, 107, 82, .18);
     }
 
     .nav {
@@ -144,7 +143,7 @@
     .btn-primary {
       background: var(--green);
       color: white;
-      box-shadow: 0 10px 24px rgba(23, 107, 82, .18);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
     }
 
 
@@ -163,31 +162,32 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns: 1fr auto;
       gap: 56px;
       align-items: center;
     }
 
     h1 {
-      font-size: clamp(42px, 6vw, 72px);
+      font-size: clamp(52px, 6vw, 72px);
       font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
       font-weight: 600;
       letter-spacing: -.015em;
       line-height: 1.05;
       margin: 0 0 40px;
-      max-width: 760px;
     }
 
-    .lead {
-      color: var(--secundary);
-      max-width: 650px;
-      background: none;
-      margin: 0 0 40px;
-      border-radius: 50px;
-      font-size: 22px;
-      line-height: 1.4705882353;
-      font-weight: 400;
-      letter-spacing: -.022em;
+    .hero-image {
+      display: block;
+      width: 100%;
+      /* Faz a imagem ocupar a largura disponível do container */
+      max-width: 500px;
+      /* Evita que ela fique gigante em telas grandes (ajuste como quiser) */
+      height: auto;
+      /* Mantém a proporção da imagem para não distorcer */
+      margin: 40px 0;
+      /* Espaçamento acima e abaixo da imagem */
+      border-radius: 28px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .hero-actions {
@@ -195,111 +195,6 @@
       gap: 12px;
       flex-wrap: wrap;
       margin-bottom: 24px;
-    }
-
-    .mockup-container {
-      margin: 0 auto;
-      max-width: 340px;
-      padding: 35px 10px;
-      background: #000000;
-      border-radius: 40px;
-    }
-
-    .mockup {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .mockup-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .mockup-title {
-      color: var(--muted);
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    .mockup-badge {
-      font-size: 12px;
-      font-weight: 600;
-      background: #eef5f2;
-      color: var(--green);
-      padding: 7px 10px;
-      border-radius: 999px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .stat {
-      padding: 18px;
-      border-radius: 18px;
-      background: #f7f9f8;
-      border: 1px solid #edf0ee;
-    }
-
-    .stat small {
-      display: block;
-      font-size: 15px;
-      color: var(--text);
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
-
-    .stat strong {
-      font-size: 28px;
-      letter-spacing: -.04em;
-    }
-
-    .people {
-      border: 1px solid #edf0ee;
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    .person {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 16px;
-      border-bottom: 1px solid #edf0ee;
-      gap: 10px;
-    }
-
-    .person:last-child {
-      border-bottom: 0;
-    }
-
-    .person-name {
-      font-weight: 750;
-    }
-
-    .status {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--green);
-      background: linear-gradient(140deg, #41ff8a, #c5ffdb);
-      padding: 7px 14px;
-      border-radius: 999px;
-      white-space: nowrap;
-      box-shadow: inset 0 0 25px #ffffff, inset 0 0 10px #ffffff, 0 1px 2px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .06);
-    }
-
-    .status.off {
-      background: #f1f2f1;
-      color: #79827e;
-      box-shadow: none;
     }
 
     section {
@@ -313,7 +208,7 @@
     }
 
     .section-head h2 {
-      font-size: clamp(32px, 4.5vw, 48px);
+      font-size: clamp(52px, 6vw, 72px);
       line-height: 1.08;
       letter-spacing: -.035em;
       margin: 0 0 40px;
@@ -326,6 +221,10 @@
       line-height: 1.4705882353;
       font-weight: 400;
       letter-spacing: -.022em;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 18px;
+      background: var(--surface);
     }
 
     .three {
@@ -333,6 +232,20 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
+
+    .card-image {
+      width: 100%;
+      /* Faz a imagem ocupar a largura do card */
+      height: auto;
+      /* Mantém a proporção */
+      display: block;
+      /* Evita espaços vazios estranhos embaixo da imagem */
+      margin: 16px auto;
+      /* Centraliza a imagem e dá espaço entre o ícone e o título */
+      border-radius: 10px;
+      /* Deixa os cantos da imagem levemente arredondados caso seja uma foto */
+    }
+
 
     .info-card {
       background: var(--surface);
@@ -357,13 +270,16 @@
 
     .info-card h3 {
       margin: 0 0 9px;
-      font-size: 22px;
+      font-size: 32px;
       letter-spacing: -.02em;
     }
 
     .info-card p {
-      margin: 0;
       color: var(--muted);
+      font-size: 22px;
+      line-height: 1.4705882353;
+      font-weight: 400;
+      letter-spacing: -.022em;
     }
 
     .pricing {
@@ -401,8 +317,10 @@
     }
 
     .plan-name {
-      font-size: 18px;
-      font-weight: 850;
+      color: var(--green);
+      font-size: 22px;
+      line-height: 1.4705882353;
+      font-weight: 600;
       margin-bottom: 14px;
     }
 
@@ -590,9 +508,6 @@
         font-size: 13px;
       }
 
-      h1 {
-        font-size: 43px;
-      }
 
 
       .hero-actions {
@@ -644,8 +559,9 @@
         <div>
           <h1>Controle de ponto simples para sua equipe.</h1>
 
-          <p class="lead">Seus funcionários registram entrada, saída e intervalo pelo celular. Você acompanha as horas
-            de toda a equipe em um único lugar.</p>
+          <!-- Nova tag de imagem substituindo o parágrafo -->
+          <img class="hero-image" src="imagen/male-engineer-working-phone.jpg"
+            alt="Descrição da imagem para acessibilidade">
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#planos">Ver planos e preços</a>
@@ -653,31 +569,7 @@
           </div>
         </div>
 
-        <div class="mockup-container">
-          <div class="mockup" aria-label="Exemplo ilustrativo do painel">
-            <div class="mockup-top">
-              <div class="mockup-title">Olá, John!</div>
-              <div class="mockup-badge">Exemplo</div>
-            </div>
 
-            <div class="stats">
-              <div class="stat"><small>Total de horas semanais</small><strong>122h</strong></div>
-              <div class="stat"><small>Trabalhando agora</small><strong>2 de 4</strong></div>
-
-            </div>
-
-            <div class="people">
-              <div class="person"><span class="person-name">Funcionário A</span><span class="status">Trabalhando</span>
-              </div>
-              <div class="person"><span class="person-name">Funcionário B</span><span class="status">Trabalhando</span>
-              </div>
-              <div class="person"><span class="person-name">Funcionário C</span><span class="status off">Fora do
-                  horário</span></div>
-              <div class="person"><span class="person-name">Funcionário D</span><span class="status off">Fora do
-                  horário</span></div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -686,30 +578,49 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Como funciona?</h2>
-          <p>Sem lista enorme de funções. Apenas o que ajuda no controle da equipe.</p>
+          <p>Automatize o controle de ponto para manter sua empresa eficiente e organizada.</p>
         </div>
 
         <div class="three">
+
+          <!-- Card 1 -->
           <article class="info-card">
             <div class="icon">1</div>
+            <!-- Imagem adicionada aqui -->
             <h3>Ponto pelo celular</h3>
-            <p>O funcionário registra a própria jornada sem folha de papel.</p>
+            <p>O funcionário registra a própria jornada no celular.</p>
+            <img class="card-image" src="imagen/medium-shot-engineer-looking-phone.jpg"
+              alt="Funcionário registrando ponto no celular">
+
           </article>
 
+          <!-- Card 2 -->
           <article class="info-card">
             <div class="icon">2</div>
+            <!-- Imagem adicionada aqui -->
             <h3>Painel para o dono</h3>
             <p>Você consegue acompanhar quem está trabalhando e as horas registradas.</p>
+            <img class="card-image"
+              src="imagen/front-view-young-attractive-male-with-beard-black-dark-classic-modern-suit-white-construction-helmet-using-grey-laptop-blue-space.jpg"
+              alt="Painel administrativo de controle de ponto">
+
           </article>
 
+          <!-- Card 3 -->
           <article class="info-card">
             <div class="icon">3</div>
-            <h3>Arquivo das horas</h3>
-            <p>Todos os clientes podem receber os registros em CSV sem custo adicional.</p>
+            <!-- Imagem adicionada aqui -->
+            <h3>Cálculo automático das horas</h3>
+            <p>O sistema calcula as horas trabalhadas por dia e por semana, descontando os intervalos automaticamente.
+            </p>
+            <img class="card-image" src="imagen/9f9f354d029fd68384bcf247975e3b8d.jpg" alt="Ícone de arquivo CSV">
+
           </article>
+
         </div>
       </div>
     </section>
+
 
     <section id="planos">
       <div class="wrap">
@@ -759,21 +670,33 @@
 
         <div class="faq">
           <details open>
-            <summary>Estou comprando o sistema?</summary>
-            <p>Não. Você paga uma mensalidade para usar o sistema. Enquanto a assinatura estiver ativa, sua empresa
-              continua usando o serviço.</p>
+            <summary>Como funciona a assinatura?</summary>
+            <p>Você paga uma mensalidade para utilizar o sistema. Não há necessidade de comprar o software.</p>
           </details>
 
           <details>
-            <summary>O CSV é pago?</summary>
-            <p>Não. O arquivo CSV faz parte do serviço normal e pode ser usado pela empresa para guardar seus registros.
+            <summary>Os funcionários precisam instalar algum aplicativo?</summary>
+            <p>Não. Cada funcionário acessa o sistema diretamente pelo navegador do celular, através de um link
+              individual.
             </p>
           </details>
 
           <details>
-            <summary>O relatório em PDF é obrigatório?</summary>
-            <p>Não. É opcional. O adicional custa $5 por funcionário por mês e deixa os registros organizados em PDF com
-              a identidade da empresa.</p>
+            <summary>Como posso acompanhar as horas dos funcionários?</summary>
+            <p>Pelo painel do administrador, você acompanha quem está trabalhando, os intervalos e as horas registradas
+              por dia e por semana.</p>
+          </details>
+
+          <details>
+            <summary>O sistema calcula as horas automaticamente?</summary>
+            <p>Sim. As horas são calculadas automaticamente, considerando os horários de entrada, saída e intervalos
+              registrados.</p>
+          </details>
+
+          <details>
+            <summary>Posso baixar os registros da minha equipe?</summary>
+            <p>im. Você pode exportar os registros em CSV gratuitamente. Também oferecemos relatórios em PDF
+              personalizados por US$ 5 por funcionário ao mês.</p>
           </details>
         </div>
       </div>
