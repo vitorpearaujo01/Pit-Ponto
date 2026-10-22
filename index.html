@@ -168,6 +168,9 @@
     }
 
     h1 {
+      color: transparent;
+      background: linear-gradient(90deg, #000000 0%, #4e4e4e 100%);
+      background-clip: text;
       font-size: clamp(52px, 6vw, 72px);
       font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
       font-weight: 600;
@@ -235,15 +238,11 @@
 
     .card-image {
       width: 100%;
-      /* Faz a imagem ocupar a largura do card */
       height: auto;
-      /* Mantém a proporção */
       display: block;
-      /* Evita espaços vazios estranhos embaixo da imagem */
       margin: 16px auto;
-      /* Centraliza a imagem e dá espaço entre o ícone e o título */
       border-radius: 10px;
-      /* Deixa os cantos da imagem levemente arredondados caso seja uma foto */
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
 
